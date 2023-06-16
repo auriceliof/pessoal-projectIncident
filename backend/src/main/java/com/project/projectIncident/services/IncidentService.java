@@ -1,6 +1,7 @@
 package com.project.projectIncident.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,13 @@ public class IncidentService {
 		
 		return list.stream().map(x -> new IncidentDTO(x)).collect(Collectors.toList());
 	}
+	
+	@Transactional(readOnly = true)
+	public IncidentDTO findById(Long id){
+		
+		Optional<Incident> obj = repository.findById(id);
+		Incident entity = obj.get();
+		
+		return new IncidentDTO(entity);
+	}	
 }
