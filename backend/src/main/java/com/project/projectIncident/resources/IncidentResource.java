@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.projectIncident.entities.Incident;
+import com.project.projectIncident.dto.IncidentDTO;
 import com.project.projectIncident.services.IncidentService;
 
 @RestController
@@ -19,9 +19,9 @@ public class IncidentResource {
 	private IncidentService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Incident>> findAll(){
+	public ResponseEntity<List<IncidentDTO>> findAll(){
 	
-		List<Incident> list = service.findAll();
+		List<IncidentDTO> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);		
 	}
