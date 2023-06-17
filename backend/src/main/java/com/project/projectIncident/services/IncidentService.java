@@ -18,6 +18,7 @@ public class IncidentService {
 	@Autowired
 	private IncidentRepository repository;
 	
+	
 	@Transactional(readOnly = true)
 	public List<IncidentDTO> findAll(){
 		
@@ -26,6 +27,7 @@ public class IncidentService {
 		return list.stream().map(x -> new IncidentDTO(x)).collect(Collectors.toList());
 	}
 	
+	
 	@Transactional(readOnly = true)
 	public IncidentDTO findById(Long id){
 		
@@ -33,5 +35,43 @@ public class IncidentService {
 		Incident entity = obj.get();
 		
 		return new IncidentDTO(entity);
-	}	
+	}
+	
+	
+	@Transactional
+	public IncidentDTO insert(IncidentDTO dto) {
+		
+		Incident entity = new Incident();
+		entity.setProvidence(dto.getProvidence());
+		entity.setReportVictim(dto.getReportVictim());
+		entity.setViolationVictim(dto.getViolationVictim());
+		entity.setDateRegister(dto.getDateRegister());
+		
+		entity = repository.save(entity);
+		
+		return new IncidentDTO(entity);
+	} 
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
