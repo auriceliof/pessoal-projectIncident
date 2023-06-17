@@ -53,6 +53,20 @@ public class IncidentService {
 	} 
 	
 	
+	@Transactional
+	public IncidentDTO update(Long id, IncidentDTO dto) {
+		
+		Incident entity = repository.getReferenceById(id);
+		entity.setProvidence(dto.getProvidence());
+		entity.setReportVictim(dto.getReportVictim());
+		entity.setViolationVictim(dto.getViolationVictim());
+		
+		entity = repository.save(entity);
+		
+		return new IncidentDTO(entity);
+	}
+	
+	
 	
 }
 
