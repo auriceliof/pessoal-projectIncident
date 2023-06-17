@@ -1,10 +1,10 @@
 package com.project.projectIncident.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +18,22 @@ public class IncidentService {
 	@Autowired
 	private IncidentRepository repository;
 	
-	
+	/*
 	@Transactional(readOnly = true)
 	public List<IncidentDTO> findAll(){
 		
 		List<Incident> list = repository.findAll();
 		
 		return list.stream().map(x -> new IncidentDTO(x)).collect(Collectors.toList());
+	}
+	*/
+	
+	@Transactional(readOnly = true)
+	public Page<IncidentDTO> findAllPaged(Pageable pageable){
+		
+		Page<Incident> list = repository.findAll(pageable);
+		
+		return list.map(x -> new IncidentDTO(x));
 	}
 	
 	

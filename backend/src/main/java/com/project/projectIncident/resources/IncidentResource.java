@@ -1,9 +1,10 @@
 package com.project.projectIncident.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +26,20 @@ public class IncidentResource {
 	@Autowired
 	private IncidentService service;
 
-	
+	/*
 	@GetMapping
 	public ResponseEntity<List<IncidentDTO>> findAll() {
 
 		List<IncidentDTO> list = service.findAll();
+
+		return ResponseEntity.ok().body(list);
+	}
+	*/
+	
+	@GetMapping
+	public ResponseEntity<Page<IncidentDTO>> findAll(Pageable pageable) {
+
+		Page<IncidentDTO> list = service.findAllPaged(pageable);
 
 		return ResponseEntity.ok().body(list);
 	}
