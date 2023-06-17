@@ -45,7 +45,6 @@ public class IncidentService {
 		entity.setProvidence(dto.getProvidence());
 		entity.setReportVictim(dto.getReportVictim());
 		entity.setViolationVictim(dto.getViolationVictim());
-		entity.setDateRegister(dto.getDateRegister());
 		
 		entity = repository.save(entity);
 		

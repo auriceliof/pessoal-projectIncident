@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,8 @@ public class Incident implements Serializable{
 	private String providence;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dateRegister;
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant dateUpdate;
 	
 	public Incident() {
 		
@@ -35,7 +39,6 @@ public class Incident implements Serializable{
 		this.reportVictim = reportVictim;
 		this.violationVictim = violationVictim;
 		this.providence = providence;
-		this.dateRegister = dateRegister;
 	}
 
 
@@ -77,6 +80,24 @@ public class Incident implements Serializable{
 
 	public void setDateRegister(Instant dateRegister) {
 		this.dateRegister = dateRegister;
+	}
+
+	public Instant getDateUpdate() {
+		return dateUpdate;
+	}
+
+	public void setDateUpdate(Instant dateUpdate) {
+		this.dateUpdate = dateUpdate;
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		dateRegister = Instant.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		dateUpdate = Instant.now();
 	}
 
 	@Override
