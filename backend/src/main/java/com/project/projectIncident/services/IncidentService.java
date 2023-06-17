@@ -67,6 +67,10 @@ public class IncidentService {
 	}
 	
 	
+	public void delete(Long id) {
+	
+		repository.deleteById(id);
+	}
 	
 }
 
