@@ -1,4 +1,4 @@
 # projectIncident
-PROJETO PESSOAL PARA CADASTRO DE INCIDENTES.
-Projeto original para fins acadêmicos.
+PROJETO DESTINADO A CADASTRO DE INCIDENTES.
+
 Projeto na linguagem JAVA, Framework Springboot e React.
